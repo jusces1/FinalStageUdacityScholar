@@ -10,12 +10,12 @@ let markers = [];
 /**
  * Fetch neighborhoods and cuisines as soon as the page is loaded.
  */
-document.addEventListener('DOMContentLoaded', (event) => {
+
+window.addEventListener("load", function () {
   DbHelperRestaurnats.openDatabase_notSaved_restUpdates().then(function (db) {
     if (!db) return;
     let tx = db.transaction('notSavedRestUpdate', 'readwrite');
     let store = tx.objectStore('notSavedRestUpdate');
-
     return store.getAll();
   }).then(function (resp) {
     if (resp.length > 0) {
@@ -30,10 +30,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
       });
     }
   });
+});
+document.addEventListener('DOMContentLoaded', (event) => {
   if (!restInfo.getParameterByName('id')) {
     fetchNeighborhoods();
     fetchCuisines();
-    updateRestaurants()
+    updateRestaurants();
     document.getElementById('neighborhoods-select').addEventListener('change', (event) => {
       updateRestaurants();
     });
@@ -45,7 +47,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     stars.forEach(function (star) {
       star.addEventListener('click', restInfo.setRating);
     });
-
     let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
     let target = stars[rating - 1];
     target.dispatchEvent(new MouseEvent('click'));
@@ -166,8 +167,6 @@ window.initMap = function () {
         DbHelperRestaurnats.mapMarkerForRestaurant(self.restaurant, self.map);
       }
     });
-  } else {
-    updateRestaurants();
   }
 };
 
