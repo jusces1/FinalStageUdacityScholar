@@ -227,8 +227,8 @@ function fillRestaurantsHTML() {
 function createRestaurantHTML(restaurant) {
   var li = document.createElement('li');
   var image = document.createElement('img');
-  image.className = 'restaurant-img';
-  image.src = image.src = DbHelperRestaurnats.imageUrlForRestaurant(restaurant).split('.')[0] + "_medium." + DbHelperRestaurnats.imageUrlForRestaurant(restaurant).split('.')[1];
+  image.className = 'restaurant-img lazyload';
+  image.setAttribute("data-src",  DbHelperRestaurnats.imageUrlForRestaurant(restaurant).split('.')[0] + "_medium." + DbHelperRestaurnats.imageUrlForRestaurant(restaurant).split('.')[1]);
   image.alt = restaurant.name;
 
   li.append(image);
