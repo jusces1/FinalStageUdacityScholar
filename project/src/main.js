@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     });
     document.getElementById('cuisines-select').addEventListener('change', (event) => {
       updateRestaurants();
-    });  
+    }); 
   } else {
     let stars = document.querySelectorAll('.star');
     stars.forEach(function (star) {
@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     let rating = parseInt(document.querySelector('.stars').getAttribute('data-rating'));
     let target = stars[rating - 1];
     target.dispatchEvent(new MouseEvent('click'));
-    
+
     //add event listener on click to submit review 
     document.getElementById('send').addEventListener('click', (event) => {
       reviews.SubmitReview();
